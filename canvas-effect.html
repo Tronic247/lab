@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #000;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        canvas.style.position = 'fixed';
+        canvas.style.top = '0';
+        canvas.style.left = '0';
+
+
+
+        const a = e => {
+            let rippleSize = 0;
+
+            let pos = {
+                x: e.clientX,
+                y: e.clientY
+            };
+
+            const ripple = setInterval(() => {
+                ctx.fillStyle = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, 0.05)`;
+                ctx.beginPath();
+                ctx.arc(e.clientX, e.clientY, rippleSize, 0, Math.PI * 2, false);
+                ctx.fill();
+
+                rippleSize += 1;
+
+                if (rippleSize > 20) {
+                    clearInterval(ripple)
+
+                    setTimeout(() => {
+                        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                    }, 1000)
+                }
+            }, 0);
+
+
+        }
+
+        document.onmousemove = a
+    </script>
+</body>
+
+</html>
