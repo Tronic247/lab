@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *,
+        *:after,
+        *:before {
+            margin: 0;
+            padding: 0;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+
+        #prompt {
+            max-height: 100vh;
+            overflow: auto;
+            background: #202225;
+            color: white;
+            min-height: 100vh;
+            padding: 11px;
+            line-height: 30px;
+            font-family: monospace;
+            font-size: 16px;
+        }
+
+
+        #prompt_input {
+            display: inline-block;
+            background: transparent;
+            border: none;
+            font-size: inherit;
+            color: white;
+            outline: none;
+        }
+
+        .prompt_line {
+            width: max-content;
+        }
+
+        .blink {
+            animation: blinker 1s infinite steps(1);
+        }
+
+        @keyframes blinker {
+            50% {
+                opacity: 0.8;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="prompt">
+        <input type="text" id="prompt_input" autocomplete="false" autofocus>
+    </div>
+
+    <script>
+        const prompt = document.getElementById('prompt');
+
+        const addToPrompt = html => {
+            const input = prompt.querySelector('#prompt_input');
+            input.focus();
+
+            // Add before the input
+            const newElement = document.createElement('div');
+            newElement.innerHTML = html;
+            newElement.classList.add('prompt_line');
+            prompt.insertBefore(newElement, input);
+
+            // Scroll to bottom
+            prompt.scrollTop = prompt.scrollHeight;
+        };
+
+        const onInput = action => {
+            window.addEventListener('keydown', e => {
+                if (e.key === 'Enter') {
+                    const input = prompt.querySelector('#prompt_input');
+                    const value = input.value;
+                    input.value = '';
+
+                    action(value);
+                }
+            });
+
+        };
+
+        addToPrompt("Welcome! Type 'help' for a list of commands.");
+
+        const colors = {
+            bgBlue(...args) {
+                return `<span style="background-color: #252222; color: white;">${args.join(
+                    ' '
+                )}</span>`;
+            },
+            bgRed(...args) {
+                return `<span style="background-color: #ff0000; color: white;">${args.join(
+                    ' '
+                )}</span>`;
+            },
+            bgGreen(...args) {
+                return `<span style="background-color: #00ff00; color: white;">${args.join(
+                    ' '
+                )}</span>`;
+            },
+            bgYellow(...args) {
+                return `<span style="background-color: #ffff00; color: white;">${args.join(
+                    ' '
+                )}</span>`;
+            },
+            bgCyan(...args) {
+                return `<span style="background-color: #00ffff; color: white;">${args.join(
+                    ' '
+                )}</span>`;
+            },
+            fgBlue(...args) {
+                return `<span style="color: #252222;">${args.join(' ')}</span>`;
+            },
+            fgRed(...args) {
+                return `<span style="color: #ff0000;">${args.join(' ')}</span>`;
+            },
+            fgGreen(...args) {
+                return `<span style="color: #00ff00;">${args.join(' ')}</span>`;
+            },
+            fgYellow(...args) {
+                return `<span style="color: #ffff00;">${args.join(' ')}</span>`;
+            },
+            fgCyan(...args) {
+                return `<span style="color: #00ffff;">${args.join(' ')}</span>`;
+            },
+            fgWhite(...args) {
+                return `<span style="color: #ffffff;">${args.join(' ')}</span>`;
+            },
+            fgBlack(...args) {
+                return `<span style="color: #000000;">${args.join(' ')}</span>`;
+            },
+            fgMagenta(...args) {
+                return `<span style="color: #ff00ff;">${args.join(' ')}</span>`;
+            },
+            blink(...args) {
+                return `<span class=blink>${args.join(' ')}</span>`;
+            },
+        }
+
+        onInput(value => {
+            if (value === 'help') {
+                addToPrompt("Available commands: <br> - help: show this message <br> - clear: clear the prompt");
+            } else if (value === 'clear') {
+                prompt.querySelectorAll('div').forEach(div => div.remove());
+            } else {
+                if (value.trim()) addToPrompt(`Unknown command: ${value}`);
+                else addToPrompt("<br>");
+            }
+        });
+    </script>
+</body>
+
+</html>
