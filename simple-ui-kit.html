@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: inherit;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --light: #fff;
+            --dark: #000;
+
+            --primary--lightest: #3386F0;
+            --primary--light: #1F7BF0;
+            --primary: #0C70F0;
+            --primary--dark: #0863D7;
+            --primary--darkest: #0757BD;
+            --secondary: #F5F5F5;
+
+            --grey--lightest: #E6E8EF;
+            --grey--light: #DADDE7;
+            --grey: #CED2DF;
+            --grey--dark: #C1C6D7;
+            --grey--darkest: #B4BBCF;
+
+            --red--lightest: #EF2E52;
+            --red--light: #EE1B42;
+            --red: #E41138;
+            --red--dark: #D11033;
+            --red--darkest: #BE0E2E;
+
+            --green--lightest: #3FCA4F;
+            --green--light: #35C045;
+            --green: #30B03F;
+            --green--dark: #2CA039;
+            --green--darkest: #279034;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--dark);
+        }
+
+        /* 
+        ** Container 
+        */
+        .container {
+            max-width: 100%;
+        }
+
+        /*
+        ** Headings
+        */
+        .heading {
+            margin-bottom: 20px;
+            margin-top: 10px;
+        }
+
+        .heading--h1 {
+            font-size: 40px;
+        }
+
+        .heading--h2 {
+            font-size: 35px;
+        }
+
+        .heading--h3 {
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .heading--h4 {
+            font-size: 25px;
+            font-weight: 600;
+        }
+
+        .heading--h5 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .heading--h6 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        /*
+        ** Sections
+        */
+        .section {
+            border: 1px solid var(--grey--light);
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        /*
+        ** Buttons
+        */
+        .button {
+            border: none;
+            padding: 10px 20px;
+            font-size: 14px;
+            border-radius: 4px;
+            background: none;
+            outline: none;
+            cursor: pointer;
+            color: var(--dark);
+            outline-offset: 4px;
+        }
+
+        .button:focus-visible {
+            outline: 4px solid var(--primary);
+        }
+
+
+        .button--fill {
+            background: var(--grey--lightest);
+            color: black;
+            transition: background 0.2s ease;
+        }
+
+        .button--fill:hover {
+            background: var(--grey--light);
+        }
+
+        .button--fill:active {
+            background: var(--grey);
+        }
+
+
+
+        .button--outline {
+            box-shadow: inset 0px 0px 0px 2px var(--grey--lightest);
+            transition: box-shadow 0.2s ease;
+        }
+
+        .button--outline:hover {
+            box-shadow: inset 0px 0px 0px 2px var(--grey--light);
+        }
+
+        .button--outline:active {
+            box-shadow: inset 0px 0px 0px 2px var(--grey);
+        }
+
+
+
+        .button--ghost {
+            transition: background 0.2s ease;
+        }
+
+        .button--ghost:hover {
+            background: var(--grey--lightest);
+            color: var(--primary);
+        }
+
+        .button--ghost:active {
+            background: var(--grey--light);
+        }
+
+
+
+
+
+
+        .button--primary.button--fill {
+            background: var(--primary);
+            color: white;
+        }
+
+        .button--primary.button--fill:hover {
+            background: var(--primary--dark);
+        }
+
+        .button--primary.button--fill:active {
+            background: var(--primary--darkest);
+        }
+
+
+
+        .button--primary.button--outline {
+            --grey--lightest: var(--primary--lightest);
+            color: var(--primary);
+        }
+
+        .button--primary.button--outline:hover {
+            --grey--light: var(--primary--light);
+        }
+
+        .button--primary.button--outline:active {
+            --grey: var(--primary);
+        }
+
+
+
+        .button--primary.button--ghost {
+            color: var(--primary);
+        }
+
+
+
+
+
+
+
+
+
+        .button--red.button--fill {
+            background: var(--red);
+            color: white;
+        }
+
+        .button--red.button--fill:hover {
+            background: var(--red--dark);
+        }
+
+        .button--red.button--fill:active {
+            background: var(--red--darkest);
+        }
+
+
+
+        .button--red.button--outline {
+            --grey--lightest: var(--red--lightest);
+            color: var(--red);
+        }
+
+        .button--red.button--outline:hover {
+            --grey--light: var(--red--light);
+        }
+
+        .button--red.button--outline:active {
+            --grey: var(--red);
+        }
+
+
+
+        .button--red.button--ghost {
+            color: var(--red);
+        }
+
+
+
+
+
+
+
+
+        .button--green.button--fill {
+            background: var(--green);
+            color: white;
+        }
+
+        .button--green.button--fill:hover {
+            background: var(--green--dark);
+        }
+
+        .button--green.button--fill:active {
+            background: var(--green--darkest);
+        }
+
+
+
+        .button--green.button--outline {
+            --grey--lightest: var(--green--lightest);
+            color: var(--green);
+        }
+
+        .button--green.button--outline:hover {
+            --grey--light: var(--green--light);
+        }
+
+        .button--green.button--outline:active {
+            --grey: var(--green);
+        }
+
+
+
+        .button--green.button--ghost {
+            color: var(--green);
+        }
+
+
+
+
+        /*
+        ** Inputs
+        */
+        .input {
+            border: 1px solid var(--grey--lightest);
+            padding: 10px 16px;
+            border-radius: 4px;
+            font-size: 14px;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .input:hover {
+            border-color: var(--grey--light);
+        }
+
+        .input:focus {
+            border-color: var(--primary);
+            box-shadow: 0px 0px 0px 1px var(--primary);
+        }
+
+
+
+
+        /*
+        ** Alerts
+        */
+        .alert {
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid var(--grey--lightest);
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .alert__left {
+            flex: 1;
+        }
+
+
+        .alert--green {
+            border-color: var(--green--lightest);
+            color: var(--green);
+        }
+
+        .alert--red {
+            border-color: var(--red--lightest);
+            color: var(--red);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 class="heading heading--h1">Heading 1</h1>
+        <h1 class="heading heading--h2">Heading 2</h1>
+        <h1 class="heading heading--h3">Heading 3</h1>
+        <h1 class="heading heading--h4">Heading 4</h1>
+        <h1 class="heading heading--h5">Heading 5</h1>
+        <h1 class="heading heading--h6">Heading 6</h1>
+
+
+        <section class="section">
+            <h1 class="heading heading--h2">Buttons</h1>
+
+            <button class="button">.button</button>
+            <button class="button button--fill">Filled button</button>
+            <button class="button button--outline">Outlined button</button>
+            <button class="button button--ghost">ghost button</button>
+
+            <h1 class="heading heading--h3">Primary</h1>
+
+            <button class="button">.button</button>
+            <button class="button button--primary button--fill">Filled button</button>
+            <button class="button button--primary button--outline">Outlined button</button>
+            <button class="button button--primary button--ghost">ghost button</button>
+
+            <h1 class="heading heading--h3">red</h1>
+
+            <button class="button">.button</button>
+            <button class="button button--red button--fill">Filled button</button>
+            <button class="button button--red button--outline">Outlined button</button>
+            <button class="button button--red button--ghost">ghost button</button>
+
+            <h1 class="heading heading--h3">green</h1>
+
+            <button class="button">.button</button>
+            <button class="button button--green button--fill">Filled button</button>
+            <button class="button button--green button--outline">Outlined button</button>
+            <button class="button button--green button--ghost">ghost button</button>
+
+        </section>
+
+        <section class="section">
+            <h1 class="heading heading--h2">Inputs</h1>
+
+            <input class="input" type="text" placeholder="Text input">
+            <input class="input" type="password" placeholder="Password input">
+
+        </section>
+
+
+        <section class="section">
+            <h1 class="heading heading--h2">Alerts</h1>
+
+            <div class="alert">
+                <div class="alert__left">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+                <div class="alert__right">
+                    <button class="button button--ghost">Close</button>
+                </div>
+            </div>
+
+            <div class="alert alert--red">
+                <div class="alert__left">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+                <div class="alert__right">
+                    <button class="button button--ghost">Close</button>
+                </div>
+            </div>
+
+            <div class="alert alert--green">
+                <div class="alert__left">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                </div>
+                <div class="alert__right">
+                    <button class="button button--ghost">Close</button>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+
+    <script>
+
+    </script>
+</body>
+
+</html>
